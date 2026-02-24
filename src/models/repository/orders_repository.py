@@ -44,3 +44,31 @@ class OrdersRepository:
         collection = self.__db_connection.get_collection(self.__collection_name)
         data = collection.find_one({ "_id": ObjectId(object_id) })
         return data
+
+    def edit_registry(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_one(
+            { "_id": ObjectId("6999c64d01c4c31466b6c0ec") },
+            { "$set": { "items.pizza.quantidade": 30 } }
+        )
+
+    def edit_many_registries(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_many(
+            { "items.refrigerante": { "$exists": True } },
+            { "$set": { "items.refrigerante.quantidade": 8000 } }
+        )
+
+    def edit_registry_with_increment(self) -> None:    
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_one(
+            { "_id": ObjectId("6999c64d01c4c31466b6c0ec") },
+            { "$inc": { "items.pizza.quantidade": 200 } }
+        )
+
+    def edit_registry_with_decrement(self) -> None:
+        collection = self.__db_connection.get_collection(self.__collection_name)
+        collection.update_one(
+            { "_id": ObjectId("6999c64d01c4c31466b6c0ec") },
+            { "$inc": { "items.pizza.quantidade": -30 } }
+        )
