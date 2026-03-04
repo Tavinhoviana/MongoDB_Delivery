@@ -4,42 +4,23 @@ def registry_order_validator(body: any):
     body_validator = Validator({
         "data": {
             "type": "dict",
-            "required": True,
             "schema": {
-                "name": {
-                    "type": "string",
-                    "required": True
-                },
-                "address": {
-                    "type": "string",
-                    "required": True
-                },
-                "cupom": {
-                    "type": "boolean",
-                    "required": True
-                },
+                "name": { "type": "string", "required": True },
+                "address": { "trpe": "string", "required": True},
+                "cupom": { "type": "boolean", "required": True},
                 "items": {
-                    "type": "list",
-                    "required": True,
+                    "type": "list"},
                     "schema": {
                         "type": "dict",
                         "schema": {
-                            "item": {
-                                "type": "string",
-                                "required": True
-                            },
-                            "quantidade": {
-                                "type": "integer",
-                                "required": True
-                            }
+                            "items": { "type": "string", "required": True},
+                            "quantidade": { "type": "integer", "required": True}
                         }
                     }
-                }
             }
         }
     })
 
     response = body_validator.validate(body)
-
     if response is False:
         raise Exception(body_validator.errors)
