@@ -27,8 +27,8 @@ def test_registry():
                 "address": "muhlenstr",
                 "cupom": False,
                 "items": [
-                    { "item": "refrigerante", "  quantidade": 2},
-                    { "item": "pizza", "  quantidade": 1}
+                    { "item": "refrigerante", "quantidade": 2},
+                    { "item": "pizza", "quantidade": 1}
 
                 ]
             }

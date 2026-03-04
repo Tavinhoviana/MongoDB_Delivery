@@ -6,21 +6,21 @@ def registry_order_validator(body: any):
             "type": "dict",
             "schema": {
                 "name": { "type": "string", "required": True },
-                "address": { "trpe": "string", "required": True},
-                "cupom": { "type": "boolean", "required": True},
+                "address": { "type": "string", "required": True },
+                "cupom": { "type": "boolean", "required": True },
                 "items": {
-                    "type": "list"},
+                    "type": "list",
                     "schema": {
                         "type": "dict",
                         "schema": {
-                            "items": { "type": "string", "required": True},
-                            "quantidade": { "type": "integer", "required": True}
+                            "item": { "type": "string", "required": True },
+                            "quantidade": { "type": "integer", "required": True }
                         }
                     }
+                }
             }
         }
     })
 
-    response = body_validator.validate(body)
-    if response is False:
+    if not body_validator.validate(body):
         raise Exception(body_validator.errors)
