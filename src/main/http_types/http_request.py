@@ -10,5 +10,5 @@ class HttpRequest:
         ) -> None:
         self.body = body
         self.header = header
-        self.params = path_params
+        self.path_params = path_params
         self.query = query

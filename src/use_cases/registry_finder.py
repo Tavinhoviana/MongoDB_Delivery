@@ -10,12 +10,12 @@ class RegistryFinder():
         self.__orders_repository = orders_repository
 
     def find(self, http_request: HttpRequest) -> HttpResponse:
-            try:
-                order_id = http_request.path_params["order_id"]
-                order = self.__search_order(order_id)
-                self.__format_response(order)
-            except Exception as exception:
-                 return handle_errors(exception)
+        try:
+            order_id = http_request.path_params["order_id"]
+            order = self.search_order(order_id)
+            return self.__format_response(order)
+        except Exception as exception:
+            return handle_errors(exception)
 
     def search_order(self, order_id: str) -> Dict:
         order = self.__orders_repository.select_by_object_id(order_id)
@@ -23,6 +23,7 @@ class RegistryFinder():
         return order
 
     def __format_response(self, order: Dict) -> HttpResponse:
+        order["_id"] = str(order["_id"])
         return HttpResponse(
             body={
                 "data": {

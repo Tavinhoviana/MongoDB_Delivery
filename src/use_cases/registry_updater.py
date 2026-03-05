@@ -14,7 +14,7 @@ class RegistryUpdater():
                 order_id = http_request.path_params["order_id"]
                 body = http_request.body
                 self.__validate_body(body)
-                self.__update_order()
+                self.__update_order(order_id, body)
                 return self.__format_response(order_id)
             except Exception as exception:
                  return handle_errors(exception)
